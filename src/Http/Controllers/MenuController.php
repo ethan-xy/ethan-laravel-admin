@@ -44,7 +44,7 @@ class MenuController extends Controller
     {
         $userPermissions = Auth::user()->getAllPermissions()->pluck('name');
         $menus = Menu::query()
-            ->where('guard_name', 'admin')
+            ->where('guard_name', request()->input('guard_name', 'admin'))
             ->orderBy('sort', 'desc')
             ->get()
             ->filter(function ($item) use ($userPermissions) {
